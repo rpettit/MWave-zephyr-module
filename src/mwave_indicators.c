@@ -294,10 +294,7 @@ K_TIMER_DEFINE(num_blink_timer, zmk_mwave_indicators_num_blink_handler, NULL);
 
 static void zmk_mwave_indicators_layer(struct k_work *work) {
 
-    if(!num && (layer!=0))
-        k_timer_start(&num_blink_timer, K_MSEC(750), K_MSEC(750));
-    else   
-        k_timer_stop(&num_blink_timer);
+    k_timer_stop(&num_blink_timer);
         
     pixels[IS_ENABLED(CONFIG_ZMK_STP_INDICATORS_SWITCH_LEDS)?0:1] = LAYER_COLORS[layer];
     LOG_DBG("Setting LED:%d", IS_ENABLED(CONFIG_ZMK_STP_INDICATORS_SWITCH_LEDS)?0:1);
